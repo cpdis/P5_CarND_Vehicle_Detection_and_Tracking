@@ -28,9 +28,9 @@ The rubric for this project is located [here](https://review.udacity.com/#!/rubr
 
 ---
 
-###Histogram of Oriented Gradients (HOG)
+### Histogram of Oriented Gradients (HOG)
 
-####1, 2, 3. Explain how (and identify where in your code) you extracted HOG features from the training images, explain how you settled on your final choice of HOG parameters, and describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
+#### 1, 2, 3. Explain how (and identify where in your code) you extracted HOG features from the training images, explain how you settled on your final choice of HOG parameters, and describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
 The code for extracting HOG features is located within the first major code block in the Jupyter notebook in the `FeatureTrack` class. HOG feature extraction is combined with spatial information and color channel histograms to perform feature extraction.
 
@@ -106,9 +106,9 @@ Under **Train the Classifier** the data is split into training and validation se
 
 ---
 
-###Sliding Window Search
+### Sliding Window Search
 
-####1, 2. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows? Show some examples of test images to demonstrate how your pipeline is working. What did you do to optimize the performance of your classifier?
+#### 1, 2. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows? Show some examples of test images to demonstrate how your pipeline is working. What did you do to optimize the performance of your classifier?
 
 Like in the classroom, I implemented a sliding window search. The sliding window search was implemeted using the `vehicle_detection()`, `detection_scaler()`, and `merge_car_detections()` in the `CarTrack()` class. Window size is decreased as the window moves from the bottom to the top of the image (as cars move from close to far away). In addition, only the lower part of the image is searched since there will not be any vehicles in the upper part of the image. The code below shows the various scaling and image size (part of the image to be searched) parameters and how the sliding window search is implemented.
 
@@ -226,10 +226,11 @@ def merge_car_detections(self, detections, image_shape, threshold):
 
 ### Video Implementation
 
-####1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
+#### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
+
 Here's a [link to my final video.](./P5_output.mp4)
 
-####2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
+#### 2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
 
 This was implemented using the `add_heat()` and `merge_car_detections()` functions and described above. 
 
@@ -245,9 +246,9 @@ This was implemented using the `add_heat()` and `merge_car_detections()` functio
 
 ---
 
-###Discussion
+### Discussion
 
-####1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
+#### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
 It's clear that the approach I took is not completely accurate. This is evidenced in a few of the test images above and at various instances throughout the output video. The pipeline will likely fail when more vehicles are in the frame, especially when they overlap each other. In addition, the classifier was trained on a small subset of cars and car locations/positions. This could cause additional classification problems. It appears that the sliding window search I implemented still has too many false positives. In the future, a better method for reducing them might help. In addition, some sort of method for creating the bounding boxes around the vehicles could be optimized to better keep track as they move through the frame. 
 
